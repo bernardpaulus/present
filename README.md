@@ -34,6 +34,8 @@ So if you wish to contribute:
 
     to setup your environment
 
+This project is built following the [django-marcador tutorial](http://django-marcador.keimlink.de/)
+
 License
 -------
 
