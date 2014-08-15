@@ -25,8 +25,8 @@ class LessonAttendance(models.Model):
 class UserDetails(models.Model):
     user = models.ForeignKey(User, verbose_name='user',
             unique=True)
-    firstName = models.CharField('first name', max_length=40)
-    lastName = models.CharField('last name', max_length=40)
+    first_name = models.CharField('first name', max_length=40)
+    last_name = models.CharField('last name', max_length=40)
     address = models.ForeignKey(Address, verbose_name='address',
         related_name='user address')
 
