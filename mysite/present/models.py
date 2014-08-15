@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
+@python_2_unicode_compatible
 class Address(models.Model):
     address = models.TextField('address', max_length=255, unique=True)
 
@@ -9,6 +11,10 @@ class Address(models.Model):
         verbose_name_plural = 'addresses'
         ordering = ['address']
 
+    def __str__(self):
+        return self.address
+
+@python_2_unicode_compatible
 class Place(models.Model):
     description = models.TextField('description', max_length=255)
     address = models.ForeignKey(Address, verbose_name='address',
@@ -19,6 +25,10 @@ class Place(models.Model):
         verbose_name_plural = 'places'
         ordering = ['address', 'description']
 
+    def __str__(self):
+        return "{} ({})".format(self.description, self.address)
+
+@python_2_unicode_compatible
 class Lesson(models.Model):
     time = models.DateTimeField('time')
     place = models.ForeignKey(Place, verbose_name='place',
@@ -29,6 +39,10 @@ class Lesson(models.Model):
         verbose_name_plural = 'lessons'
         ordering = ['time', 'place']
 
+    def __str__(self):
+        return "{}, {}".format(self.time, self.place)
+
+@python_2_unicode_compatible
 class LessonAttendance(models.Model):
     lesson = models.ForeignKey(Lesson, verbose_name='lesson',
             related_name='attendances')
@@ -41,6 +55,10 @@ class LessonAttendance(models.Model):
         verbose_name_plural = 'attendances'
         ordering = ['lesson', 'user']
 
+    def __str__(self):
+        return str({'user': user, 'lesson': lesson})
+
+@python_2_unicode_compatible
 class UserDetails(models.Model):
     user = models.ForeignKey(User, verbose_name='user',
             unique=True)
@@ -54,8 +72,10 @@ class UserDetails(models.Model):
         verbose_name_plural = 'users details'
         ordering = ['last_name', 'first_name', 'address', 'user']
 
-# TODO meta
-# TODO methods
+    def __str__(self):
+        return "{} {}, {}".format(self.last_name, self.first_name, 
+                self.address)
+
 # TODO manager
 
 
