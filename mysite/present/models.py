@@ -30,6 +30,7 @@ class Place(models.Model):
 
 @python_2_unicode_compatible
 class Lesson(models.Model):
+    # TODO start_time, end_time
     time = models.DateTimeField('time')
     place = models.ForeignKey(Place, verbose_name='place',
             related_name='lessons')
@@ -60,6 +61,7 @@ class LessonAttendance(models.Model):
 
 @python_2_unicode_compatible
 class UserDetails(models.Model):
+    # TODO birth date, phone, email
     user = models.ForeignKey(User, verbose_name='user',
             unique=True)
     first_name = models.CharField('first name', max_length=40)
